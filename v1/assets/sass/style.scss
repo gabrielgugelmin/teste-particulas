@@ -1,0 +1,211 @@
+@import 'mixins';
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background-image: url(../img/bg.jpg);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: cover;
+}
+
+
+#ContainerNatal {
+	@include transition(opacity, .5s, ease, visibility, .5s, ease);
+    overflow:hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+
+    &.is-closed{
+    	opacity: 0;
+    	visibility: hidden;
+    }
+}
+#pixie {
+    z-index:0;
+    background: rgba(#820606, .7);
+    height: 100%;
+    width: 100%;
+}
+
+.Arte{
+	@include center;
+	position: absolute;
+	top: 40%;
+	z-index: 1;
+
+	img{
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+#Logo, #Kv{
+	opacity: 0;
+	visibility: hidden;
+	animation-name: showGlitter;
+	animation-timing-function: ease-out; 
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+}
+
+#Logo{
+	margin-top: -25%;
+	position: relative;
+	width: 480px;
+	animation-duration: 1.2s; 
+	animation-delay: 1.5s;
+	z-index: 2;
+}
+
+#Kv{
+	animation-delay: 1s;
+	animation-duration: 1.5s; 
+}
+
+.glitter{
+	position: absolute;
+	opacity: 0;
+	visibility: hidden;
+
+	animation-name: showGlitter;
+	animation-duration: 1.2s; 
+	animation-timing-function: ease-out; 
+	animation-delay: 0;
+	animation-direction: alternate;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-play-state: running; 
+	
+	&--center{
+		@extend .glitter;
+		@include center;
+	}
+
+	&--bottom{
+		@extend .glitter;
+		bottom: 0;
+	}
+
+	&--left{
+		@extend .glitter;
+		left: 0;
+	}
+
+	&--right{
+		@extend .glitter;
+		right: 0;
+	}
+
+	&--top{
+		@extend .glitter;
+		top: 0;
+	}
+
+	&.g7{
+		right: 10%;
+		bottom: 10%;
+	}
+
+	&.g8{
+		top: 10%;
+	}
+}
+
+$elements: 9;
+
+
+@for $i from 0 to $elements {
+  .Glitters img:nth-child(#{$i}) {
+    animation-delay: $i * 0.35s;
+  }
+}
+
+@keyframes showGlitter {
+  from{
+  	opacity: 0;
+  	visibility: hidden;
+  }
+
+  to{
+  	opacity: 1;
+  	visibility: visible;
+  }
+}
+
+#CloseNatal{
+	display: inline-block;
+	height: 24px;
+	position: absolute;
+	right: 30px;
+	top: 30px;
+	width: 32px;
+	z-index: 1;
+
+	&::after, 
+	&::before{
+		background-color: #FFF;
+		content: "";
+		display: inline-block;
+		height: 3px;
+		left: 0;
+		position: absolute;
+		top: 10px;
+		width: 100%;
+	}
+
+	&::after{
+		@include transform(rotate(45deg));
+	}
+
+	&::before{
+		@include transform(rotate(-45deg));
+	}
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace.pace-inactive .pace-progress {
+  display: none;
+}
+
+.pace .pace-progress {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  height: 5rem;
+  width: 5rem;
+
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  -ms-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.pace .pace-progress:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: .5rem;
+  content: attr(data-progress-text);
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  line-height: 1;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.19999999999999996);
+}

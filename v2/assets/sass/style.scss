@@ -1,0 +1,165 @@
+@import 'mixins';
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#ContainerNatal {
+	@include transition(opacity, .5s, ease, visibility, .5s, ease);
+  overflow:hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+
+  &.is-closed{
+  	opacity: 0;
+  	visibility: hidden;
+  }
+}
+
+#pixie {
+    z-index:0;
+		background: rgba(245,220,54,0.96);
+		background: -moz-linear-gradient(top, rgba(245,220,54,0.96) 0%, rgba(237,110,32,0.95) 100%);
+		background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(245,220,54,0.96)), color-stop(100%, rgba(237,110,32,0.95)));
+		background: -webkit-linear-gradient(top, rgba(245,220,54,0.96) 0%, rgba(237,110,32,0.95) 100%);
+		background: -o-linear-gradient(top, rgba(245,220,54,0.96) 0%, rgba(237,110,32,0.95) 100%);
+		background: -ms-linear-gradient(top, rgba(245,220,54,0.96) 0%, rgba(237,110,32,0.95) 100%);
+		background: linear-gradient(to bottom, rgba(245,220,54,0.96) 0%, rgba(237,110,32,0.95) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5dc36', endColorstr='#ed6e20', GradientType=0 );
+    height: 100%;
+    width: 100%;
+}
+
+.l,
+.r{
+	height: 50%;
+	position: relative;
+	width: 100%;
+
+	@include MQ(M){
+		display: inline-block;
+		float: left;
+		height: 100%;
+		width: 50%;
+	}
+}
+
+.Arte{
+	height: 100%;
+	left: 0;
+	margin: 0 auto;
+	max-width: 90%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+
+	img{
+		display: block;
+		margin: 0 auto;
+	}
+
+	@include MQ(M){
+		max-width: 970px;
+	}
+
+	@include MQ(L){
+		max-width: 1170px;
+	}
+}
+
+#Logo{
+	@include center;
+	max-width: 80%;
+	position: absolute;
+	z-index: 2;
+
+	@include MQ(M){
+		max-width: 100%;
+	}
+}
+
+#Calendario{
+	@include center;
+	max-height: 80%;
+	position: absolute;
+
+	@include MQ(M){
+		max-width: 100%;
+	}
+
+}
+
+#CloseNatal{
+	display: inline-block;
+	height: 24px;
+	position: absolute;
+	right: 30px;
+	top: 30px;
+	width: 32px;
+	z-index: 10;
+
+	&::after, 
+	&::before{
+		background-color: #FFF;
+		content: "";
+		display: inline-block;
+		height: 3px;
+		left: 0;
+		position: absolute;
+		top: 10px;
+		width: 100%;
+	}
+
+	&::after{
+		@include transform(rotate(45deg));
+	}
+
+	&::before{
+		@include transform(rotate(-45deg));
+	}
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace.pace-inactive .pace-progress {
+  display: none;
+}
+
+.pace .pace-progress {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  height: 5rem;
+  width: 5rem;
+
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  -ms-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.pace .pace-progress:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: .5rem;
+  content: attr(data-progress-text);
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+  font-size: 5rem;
+  line-height: 1;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.19999999999999996);
+}
